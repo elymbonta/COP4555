@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>My Wishlist</title>
+		<link rel="stylesheet" href="styles.css" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+		<style>
+			form, table {
+				display:inline;
+				margin:0px;
+				padding:0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="title1">GeekText</div>
+		<div class="title2"></div>
+		<div class="title3"></div>
+		<% var wishname1 = 4 %>
+		<% var wishname2 = 4 %>
+		<% var wishname3 = 4 %>
+		<% for(var i=0; i < wishlistnames.length; i++) { %>
+			<% if(wishlistnames[i].num == '1') { %>
+				<% wishname1 = i %>
+			<% } %>
+			<% if(wishlistnames[i].num == '2') { %>
+				<% wishname2 = i %>
+			<% } %>
+			<% if(wishlistnames[i].num == '3') { %>
+				<% wishname3 = i %>
+			<% } %>
+		<% } %>
+		<% if ( wishlistnames[wishname1] ){ %>
+			<h2 class='cartSubHeader'><%= wishlistnames[wishname1].name %></h2>
+		<% } else { %>
+			<h2 class='cartSubHeader'>Wishlist 1</h2>
+		<% } %>
+		<form action="/renameWishlist" method="POST">
+			<input type="text" name="newname">
+			<input style="display:none" type="number" step="1" name="listnumber" value = "1" >
+			<input style="display:none" type="text" name="username" value = "<%= username %>">
+			<button type="submit">Rename</button>
+		</form>
+    	<ul class="books">
+        <% for(var i=0; i < wishlist1.length; i++) { %>
+    		<li class="books">
+        		<span><%= wishlist1[i].title %> - </span>
+				<span><%= wishlist1[i].price %></span>
+				<form action="/moveToWishlist" method="POST">
+					<input style="display:none" type="text" name="title" value = "<%= wishlist1[i].title %>">
+					<input style="display:none" type="number" step="0.01" name="price" value = "<%= wishlist1[i].price %>" >
+					<input style="display:none" type="number" step="1" name="listnumber" value = "1" >
+					<input style="display:none" type="number" step="1" name="moveto" value = "2" >
+					<input style="display:none" type="text" name="username" value = "<%= username %>">
+					<button class='addButton' type="submit">Add to wishlist 2</button>
+				</form>
+				<form action="/moveToWishlist" method="POST">
+					<input style="display:none" type="text" name="title" value = "<%= wishlist1[i].title %>">
+					<input style="display:none" type="number" step="0.01" name="price" value = "<%= wishlist1[i].price %>" >
+					<input style="display:none" type="number" step="1" name="listnumber" value = "1" >
+					<input style="display:none" type="number" step="1" name="moveto" value = "3" >
+					<input style="display:none" type="text" name="username" value = "<%= username %>">
+					<button class='addButton' type="submit">Add to wishlist 3</button>
+				</form>
+				<form action="/addToCartFromWishlist" method="POST">
+					<input style="display:none" type="text" name="title" value = "<%= wishlist1[i].title %>">
+					<input style="display:none" type="number" step="0.01" name="price" value = "<%= wishlist1[i].price %>" >
+					<input style="display:none" type="number" step="1" name="listnumber" value = "1" >
+					<input style="display:none" type="text" name="username" value = "<%= username %>">
+					<button type="submit">Add to cart</button>
+				</form>
+				<form action="/removeFromWishlist" method="POST">
+					<input style="display:none" type="text" name="title" value = "<%= wishlist1[i].title %>">
+					<input style="display:none" type="number" step="1" name="listnumber" value = "1" >
+					<input style="display:none" type="text" name="username" value = "<%= username %>">
+					<button type="submit">Remove</button>
+				</form>
+          	</li>
+        <% } %>
+    	</ul>
+		<br>
+		<% if (wishlist2.length != 0){ %>
+			<% if ( wishlistnames[wishname2] ){ %>
+				<h2 class='cartSubHeader'><%= wishlistnames[wishname2].name %></h2>
+			<% } else { %>
+				<h2 class='cartSubHeader'>Wishlist 2</h2>
+			<% } %>
+		<form action="/renameWishlist" method="POST">
+			<input type="text" name="newname">
+			<input style="display:none" type="number" step="1" name="listnumber" value = "2" >
+			<input style="display:none" type="text" name="username" value = "<%= username %>">
+			<button type="submit">Rename</button>
+		</form>
+		<% } %>
+		<ul class="books">
+			<% for(var i=0; i < wishlist2.length; i++) { %>
+				<li class="books">
+					<span><%= wishlist2[i].title %> - </span>
+					<span><%= wishlist2[i].price %></span>
+					<form action="/moveToWishlist" method="POST">
+						<input style="display:none" type="text" name="title" value = "<%= wishlist2[i].title %>">
+						<input style="display:none" type="number" step="0.01" name="price" value = "<%= wishlist2[i].price %>" >
+						<input style="display:none" type="number" step="1" name="listnumber" value = "2" >
+						<input style="display:none" type="number" step="1" name="moveto" value = "1" >
+						<input style="display:none" type="text" name="username" value = "<%= username %>">
+						<button class='addButton' type="submit">Add to wishlist 1</button>
+					</form>
+					<form action="/moveToWishlist" method="POST">
+						<input style="display:none" type="text" name="title" value = "<%= wishlist2[i].title %>">
+						<input style="display:none" type="number" step="0.01" name="price" value = "<%= wishlist2[i].price %>" >
+						<input style="display:none" type="number" step="1" name="listnumber" value = "2" >
+						<input style="display:none" type="number" step="1" name="moveto" value = "3" >
+						<input style="display:none" type="text" name="username" value = "<%= username %>">
+						<button class='addButton' type="submit">Add to wishlist 3</button>
+					</form>
+					<form action="/addToCartFromWishlist" method="POST">
+						<input style="display:none" type="text" name="title" value = "<%= wishlist2[i].title %>">
+						<input style="display:none" type="number" step="0.01" name="price" value = "<%= wishlist2[i].price %>" >
+						<input style="display:none" type="number" step="1" name="listnumber" value = "2" >
+						<input style="display:none" type="text" name="username" value = "<%= username %>">
+						<button type="submit">Add to cart</button>
+					</form>
+					<form action="/removeFromWishlist" method="POST">
+						<input style="display:none" type="text" name="title" value = "<%= wishlist2[i].title %>">
+						<input style="display:none" type="number" step="1" name="listnumber" value = "2" >
+						<input style="display:none" type="text" name="username" value = "<%= username %>">
+						<button type="submit">Remove</button>
+					</form>
+				</li>
+			<% } %>
+		</ul>
+		<br>
+		<% if (wishlist3.length != 0){ %>
+			<% if ( wishlistnames[wishname3] ){ %>
+				<h2 class='cartSubHeader'><%= wishlistnames[wishname3].name %></h2>
+			<% } else { %>
+				<h2 class='cartSubHeader'>Wishlist 3</h2>
+			<% } %>
+		<form action="/renameWishlist" method="POST">
+			<input type="text" name="newname">
+			<input style="display:none" type="number" step="1" name="listnumber" value = "3" >
+			<input style="display:none" type="text" name="username" value = "<%= username %>">
+			<button type="submit">Rename</button>
+		</form>
+		<% } %>
+		<ul class="books">
+			<% for(var i=0; i < wishlist3.length; i++) { %>
+				<li class="books">
+					<span><%= wishlist3[i].title %> - </span>
+					<span><%= wishlist3[i].price %></span>
+					<form action="/moveToWishlist" method="POST">
+						<input style="display:none" type="text" name="title" value = "<%= wishlist3[i].title %>">
+						<input style="display:none" type="number" step="0.01" name="price" value = "<%= wishlist3[i].price %>" >
+						<input style="display:none" type="number" step="1" name="listnumber" value = "3" >
+						<input style="display:none" type="number" step="1" name="moveto" value = "1" >
+						<input style="display:none" type="text" name="username" value = "<%= username %>">
+						<button class='addButton' type="submit">Add to wishlist 1</button>
+					</form>
+					<form action="/moveToWishlist" method="POST">
+						<input style="display:none" type="text" name="title" value = "<%= wishlist3[i].title %>">
+						<input style="display:none" type="number" step="0.01" name="price" value = "<%= wishlist3[i].price %>" >
+						<input style="display:none" type="number" step="1" name="listnumber" value = "3" >
+						<input style="display:none" type="number" step="1" name="moveto" value = "2" >
+						<input style="display:none" type="text" name="username" value = "<%= username %>">
+						<button class='addButton' type="submit">Add to wishlist 2</button>
+					</form>
+					<form action="/addToCartFromWishlist" method="POST">
+						<input style="display:none" type="text" name="title" value = "<%= wishlist3[i].title %>">
+						<input style="display:none" type="number" step="0.01" name="price" value = "<%= wishlist3[i].price %>" >
+						<input style="display:none" type="number" step="1" name="listnumber" value = "3" >
+						<input style="display:none" type="text" name="username" value = "<%= username %>">
+						<button type="submit">Add to cart</button>
+					</form>
+					<form action="/removeFromWishlist" method="POST">
+						<input style="display:none" type="text" name="title" value = "<%= wishlist3[i].title %>">
+						<input style="display:none" type="number" step="1" name="listnumber" value = "3" >
+						<input style="display:none" type="text" name="username" value = "<%= username %>">
+						<button type="submit">Remove</button>
+					</form>
+				</li>
+			<% } %>
+		</ul>
+		<br>
+		<form action="/cart" method="POST">
+			<input  style="display:none" type="text" name="username" value="<%= username %>">
+			<button type="submit">Shopping cart</button>
+		</form>
+	</body>
+</html>

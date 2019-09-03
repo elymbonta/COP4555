@@ -1,0 +1,163 @@
+<!-- /views/bookdetails.ejs -->
+​
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+
+    <style>
+            .topnav {
+                overflow: hidden;
+                background-color: lightgray;
+            }
+    
+            .topnav a {
+                float: left;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+    
+            .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+            }
+    
+            * {
+            box-sizing: border-box;
+            }
+    
+            .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 300px; 
+            }
+    
+            .row:after {
+            content: "";
+            display: table;
+            clear: both;
+            }
+    
+        </style>
+
+        
+    <title><%= book.title %></title>
+</head>
+<body>
+    <div>
+
+        <div class="title1">GeekText</div>
+        <div class="title2"></div>
+        <div class="title3"></div>
+
+        <br>
+
+        <!-- top nav bar -->
+        <div class="topnav">
+                <a class="active" href="/">Home</>
+        </div>
+
+
+
+        <div class="row" > 
+            <div class="column" >
+
+                <h1><%= book.title %></h1>
+                <h1 id="rating"></h1>
+                <h2> <a href=<%= book.url %>>  <%= book.author %> </a> : <%=book.bio%> </h2>
+                <h3>Genre : <%= book.genre %></h3>
+                <img src=<%= book.cover %> height="500" id='image' onclick="clickOver()" />
+                <h5>Publisher: <%= book.publisher%> </h5>
+                <h3>Price: <%= book.price %></h3>
+
+
+
+                <form action="/addToCart" method="POST">
+                    <input style="display:none" type="text" name="title" value="<%= book.title %>">
+                    <input style="display:none" type="number" step="0.01" name="price" value="<%= book.price %>" >
+                    <input style="display:none" type="text" name="username" value = "<%= username %>">
+                    <button type="submit">Add to cart</button>
+                </form>
+                <form action="/addToWishlist" method="POST">
+                    <input style="display:none" type="text" name="title" value="<%= book.title %>">
+                    <input style="display:none" type="number" step="0.01" name="price" value="<%= book.price %>" >
+                    <input style="display:none" type="text" name="username" value = "<%= username %>">
+                    <button type="submit">Add to wishlist</button>
+                </form>
+                <button onclick="viewReviews()">View Reviews</button>
+            </div>
+
+        <div class="column" >
+                <h3>Description</h3>
+                <h3><%= book.description %></h3>
+        </div>
+
+       </div>
+    </div>   
+</body>
+
+<script>
+    var idBook = <%= book.id %>
+    function viewReviews(){
+        window.location.href = `http://localhost:/review?username=edu&idBook=${idBook}`
+    }
+
+    window.onload = function(){
+        var image =  document.getElementById('image');
+        requestHTTP('GET', `getReviewsForidBook?idBook=${idBook}`, function(data){
+        reviews = JSON.parse(data)
+        averageRating = getAverageRating(reviews)
+        console.log(averageRating)
+        document.getElementById("rating").textContent = averageRating + ' stars'
+    })
+
+    }
+
+    function requestHTTP(typeOfRequest, params, func) {
+        var request = new XMLHttpRequest();
+        var url = 'http://localhost/' + params
+        request.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                func(this.responseText)
+            }
+        };
+
+        request.open(typeOfRequest, url);
+        request.send();
+}
+
+
+    function clickOver() {
+        if(image.style.height == "600px" )
+        {   
+            image.style.height= "200px"
+        }
+        else{
+            image.style.height= "600px";
+        }
+    }
+
+    function getAverageRating(reviews) {
+        var summedUpRatings = 0
+
+        for (x in reviews) {
+            review = reviews[x]
+            summedUpRatings += Number(review.rating)
+        }
+        return (summedUpRatings / reviews.length).toFixed(2)
+}
+
+image.onclick = clickOver;
+</script>
+
+</html>

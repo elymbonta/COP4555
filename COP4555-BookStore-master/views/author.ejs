@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+    <title><%= authorName %></title>
+
+
+    <style>
+        .title1 {
+            font-size: 30px;
+            text-align: center;
+            background-color: lightgray;
+            padding: 0px;
+        }
+        .title2 {
+            width: 100vw;
+            height: 20px;
+            background-color: #DCDCDC;
+            padding: 0px;
+        }
+        .title3 {
+            width: 100vw;
+            height: 14px;
+            background-color: #E8E8E8;
+            padding: 0px;
+        }
+
+        h3 {
+	        margin: 10px 0px 0px 10px;
+        }
+
+        h1 {
+            margin-left: 10px;
+        }
+
+        * {
+            font-family: 'Raleway', Helvetica, sans-serif;
+        }
+
+        body {
+            margin: 0;
+        }
+
+
+        * {
+        box-sizing: border-box;
+        }
+
+  
+        </style>
+
+
+</head>
+<body>
+    <div>
+
+        <div class="title1">GeekText</div>
+        <div class="title2"></div>
+        <div class="title3"></div>
+
+        <h1><%= authorName %></h1>
+        <h2><%= books[0].bio%></h2>
+        
+            <% for (let i = 0; i < books.length; i++) { %>
+                
+
+                
+                <a href=<%= '/book/' + books[i].id %>>
+                    <%= books[i].title %> 
+                    <img src=<%= books[i].cover %> height="200" />
+                </a>
+
+                
+            <% } %>
+       
+    </div>
+</body>
+</html>
