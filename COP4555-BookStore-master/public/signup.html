@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Sign Up</title>
+		<link rel="stylesheet" href="styles.css" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+	</head>
+
+	<body>
+		<div class="title1">Sign Up</div>
+		<div class="title2"></div>
+		<div class="title3"></div>
+		<p>Please fill in this form to create an account.</p>
+		<hr>
+		<h2>Personal Information</h2>
+		<form action="/users" method="POST">
+			<label for="username"><b>Username</b></label>
+			<input type="text" name="username">
+			<br>
+			<br>
+			<label for="psw"><b>Password</b></label>
+			<input type="text" name="password">
+			<br>
+			<br>
+			<label for="name"><b>Name</b></label>
+			<input type="text" name="name">
+			<br>
+			<br>
+			<label for="nickname"><b>Nickname</b></label>
+			<input type="text" name="nickname">
+			(Used for rating/commenting)
+			<br>
+			<br>
+			<label for="email"><b>Email</b></label>
+			<input type="email" name="email">
+			<br>
+			<br>
+			<label for="address"><b>Address 1</b></label>
+			<input type="text" name="address">
+			<br>
+			<br>
+			<label for="address"><b>Address 2</b></label>
+			<input type="text" name="address">
+			<br>
+			<br>
+			<label for="address"><b>Address 3</b></label>
+			<input type="text" name="address">
+			<br>
+			<br>
+			<label for="shipAddress"><b>Shipping Address</b></label>
+			<input type="text" name="shipAddress">
+			<br>
+			<br>
+			<br>
+			<h2>Payment Information</h2>
+
+			<h3> Primary Card Information</h3>
+
+			<label for="cardName"><b>Cardholder Name</b></label>
+			<input type="text" name="cardName">
+			<br>
+			<br>
+			<label for="cardNum"><b>Card Number</b></label>
+			<input type="number" name="cardNum">
+			<br>
+			<br>
+			<label for="cardExp"><b>Card Expiration Date</b></label>
+			<input type="month" name="cardExp">
+			<br>
+			<br>
+			<label for="cvv"><b>CVV</b></label>
+			<input type="number" name="cvv">
+			<br>
+			<br>
+
+			<h3> Other Card Information</h3>
+
+			<label for="cardName"><b>Cardholder Name</b></label>
+			<input type="text" name="cardName">
+			<br>
+			<br>
+			<label for="cardNum"><b>Card Number</b></label>
+			<input type="number" name="cardNum">
+			<br>
+			<br>
+			<label for="cardExp"><b>Card Expiration Date</b></label>
+			<input type="month" name="cardExp">
+			<br>
+			<br>
+			<label for="cvv"><b>CVV</b></label>
+			<input type="number" name="cvv">
+			<br>
+			<br>
+			
+			<button type="submit">Submit</button>
+		</form>
+	</body>
+</html>

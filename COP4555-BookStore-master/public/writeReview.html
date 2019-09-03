@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../styles.css">
+    </head>
+    <body>
+        <div id=writeReview>
+            <form class="content">
+                <h1 id='titleBook'>No such book with this ID!</h1>
+                Write Review As: <input id="writeAs"><br>
+                <h3 id='averageRating'>0 Stars</h3>
+                <select id="rating">
+                    <option value=1>1 Star</option>
+                    <option value=2>2 Stars</option>
+                    <option value=3>3 Stars</option>
+                    <option value=4>4 Stars</option>
+                    <option value=5>5 Stars</option>
+                </select> 
+                Review Title: <input type="text" name="title" id="title"><br>
+                <textarea name="message" rows="10" cols="50" id="message">Type your review here...</textarea> 
+            </form> 
+            <button type="button" id="submit" onclick="submit()">SUBMIT REVIEW</button>
+            <button type="button" id="delete" onClick="deleteReview()">DELETE REVIEW</button>
+        </div>
+        <div id=reviews></div>
+    </body>
+    <script src="writeReview.js"></script> 
+</html>
